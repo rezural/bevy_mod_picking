@@ -11,9 +11,9 @@ fn main() {
             ..Default::default()
         })
         .add_plugins(DefaultPlugins)
-        // .add_plugin(DefaultPickingPlugins)
-        // .add_plugin(DebugCursorPickingPlugin)
-        // .add_plugin(DebugEventsPickingPlugin)
+        .add_plugin(DefaultPickingPlugins)
+        .add_plugin(DebugCursorPickingPlugin)
+        .add_plugin(DebugEventsPickingPlugin)
         .add_startup_system(setup.system())
         .add_system(update.system())
         .run();
@@ -42,7 +42,7 @@ fn setup(
             transform: Transform::from_xyz(0.0, 0.5, 0.0),
             ..Default::default()
         });
-        // root.insert_bundle(PickableBundle::default());
+        root.insert_bundle(PickableBundle::default());
     
         let children = [
             (-1., -1., -1.),
