@@ -42,7 +42,7 @@ fn setup(
             transform: Transform::from_xyz(0.0, 0.5, 0.0),
             ..Default::default()
         });
-        root.insert_bundle(PickableBundle::default());
+        // root.insert_bundle(PickableBundle::default());
     
         let children = [
             (-1., -1., -1.),
@@ -58,13 +58,13 @@ fn setup(
         for origin in children.iter() {
             println!("{:?}", origin);
             root.with_children(|parent| {
-                parent.spawn_bundle(PbrBundle {
+                let mut child = parent.spawn_bundle(PbrBundle {
                     mesh: meshes.add(Mesh::from(shape::Cube { size: 0.4 })),
                     material: materials.add(Color::rgb(0.8, 0.7, 0.6).into()),
                     transform: Transform::from_xyz(origin.0, origin.1, origin.2),
                     ..Default::default()
                 });
-                // .insert_bundle(PickableBundle::default());
+                // child.insert_bundle(PickableBundle::default());
 
             });
         }
@@ -79,8 +79,8 @@ fn setup(
         .spawn_bundle(PerspectiveCameraBundle {
             transform: Transform::from_xyz(-2.0, 2.5, 10.0).looking_at(Vec3::ZERO, Vec3::Y),
             ..Default::default()
-        });
-        // .insert_bundle(PickingCameraBundle::default());
+        })
+        .insert_bundle(PickingCameraBundle::default());
 }
 
 
